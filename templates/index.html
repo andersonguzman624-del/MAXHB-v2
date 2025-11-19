@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Future Cyber Generator</title>
+  <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono|Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: radial-gradient(ellipse at center, #161638 0%, #000015 100%);
+      color: #fff;
+      font-family: 'Share Tech Mono', monospace;
+      margin:0; min-height:100vh;
+      overflow-x:hidden;
+    }
+    .neon {
+      color: #00e6ff;
+      text-shadow: 0 0 8px #00e6ff, 0 0 16px #00ffc3, 0 0 32px #5200ff;
+      letter-spacing: 2px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5em;
+      margin-top:25px;
+      text-align:center;
+    }
+    .bordered {
+      border:2px solid #0ffcb3;
+      border-radius:18px;
+      box-shadow:0 0 24px #0ffcb333, 0 0 64px #db00ff22 inset;
+      padding: 32px 24px 24px 24px;
+      margin:32px auto;
+      max-width:420px; background:rgba(34,12,50,0.6);
+    }
+    .input-cyber, button {
+      background: #21213a;
+      color: #fff;
+      border: 2px solid #db00ff;
+      border-radius:8px;
+      box-shadow:0 0 12px #db00ff66;
+      padding: 8px 12px; margin:6px 2px;
+      font-size: 1.1em;
+      font-family: 'Share Tech Mono', monospace;
+      transition: all 0.28s cubic-bezier(.77,.21,.21,.77);
+    }
+    button:hover, .input-cyber:focus {
+      border-color: #32ffe7;
+      box-shadow:0 0 24px #2effff,0 0 12px #ff00de88;
+      outline:none;
+    }
+    .code-box {
+      margin-top:26px;
+      background: linear-gradient(90deg,#00e6ff44,#0f002a44 85%);
+      border:2.5px solid #fff3;
+      border-radius:10px;
+      font-size:2em;
+      letter-spacing:3px;
+      text-align:center;
+      color: #36ffa7;
+      box-shadow:0 0 18px #00ffc380;
+      padding:17px 0;
+      animation: glow 1.13s alternate infinite cubic-bezier(.6,.21,.8,1);
+    }
+    @keyframes glow {to {box-shadow:0 0 42px #db00ffbb,0 0 21px #00e6ff99;}}
+    .footer-deco {
+      position:fixed; bottom:0; width:100%;
+      font-size:1.1em;
+      text-align:center; color:#b797ff94;
+      letter-spacing:1px;
+      padding:10px;
+    }
+    .stars {
+      text-align:center;
+      margin-bottom:24px;
+      font-size:2em;
+      color:#ff24ebcc; text-shadow:0 0 20px #00e6ffbb;
+    }
+    .btn-cyberpunk {
+      background: linear-gradient(90deg,#32ffe7,#db00ff 70%);
+      color:#121227; border:none;
+      box-shadow: 0 0 18px #db00ff77;
+      font-weight:bold;text-transform:uppercase;
+      letter-spacing:2px;
+      font-size:1.1em;
+      border-radius:7px; padding:11px 19px;
+      margin-top:18px;
+      transition:.24s cubic-bezier(.66,.13,.54,1.3);
+    }
+    .btn-cyberpunk:hover {
+      background:linear-gradient(88deg,#0ffcb3,#4f20ff 40%);
+      color:#fff; box-shadow:0 0 38px #00ffe955;
+    }
+    .loading-cyber-box {
+      display: flex;
+      justify-content: center;
+      margin-top: 38px; gap: 24px;
+    }
+    .neon-cyber {
+      font-size: 2.8em;
+      color: #db00ff;
+      animation: cyber-glow 1s infinite alternate, cyber-move 2.2s infinite cubic-bezier(.74,.09,.92,.53);
+      text-shadow: 0 0 38px #00e6ff,0 0 24px #db00ff, 0 0 12px #44008f;
+    }
+    .neon-cyber:nth-child(2) { color:#00e6ff; animation-delay: .3s;}
+    .neon-cyber:nth-child(3) { color:#ffad24; animation-delay: .6s;}
+    .neon-cyber:nth-child(4) { color:#00ffa7; animation-delay: .9s;}
+    @keyframes cyber-glow {
+      to {
+        text-shadow: 0 0 68px #db00ff, 0 0 38px #00e6ff, 0 0 24px #44008f;
+        color: #fff;
+      }
+    }
+    @keyframes cyber-move {
+      from { transform: translateY(0); }
+      50% { transform: translateY(-14px) scale(1.1);}
+      to { transform: translateY(0); }
+    }
+    .lote-box {
+      margin-top:35px;
+      font-size:1.1em;
+      color:#7fffdb;
+      border-radius:14px;
+      background:rgba(66,22,77,0.54);
+      padding:19px;
+      box-shadow:0 0 28px #00e6ff55;
+      max-height:400px; overflow-y:auto;
+      text-align:left;
+    }
+    .lote-code {
+      display:inline-block;
+      margin:2px 14px 2px 0;
+      font-family:'Share Tech Mono', monospace;
+      color:#37dfff;
+      font-weight:bold;
+      text-shadow:0 0 12px #12e6ff99;
+    }
+  </style>
+</head>
+<body>
+  <div class="neon">✧✦ FUTURE CYBER GENERATOR ✦✧</div>
+  <div class="stars">✶ ✸ ✹ ✶ ✸ ✹ ✷ ✧</div>
+  <div id="cyber-loading" class="loading-cyber-box">
+    <span class="neon-cyber">✦</span>
+    <span class="neon-cyber">✶</span>
+    <span class="neon-cyber">✸</span>
+    <span class="neon-cyber">✹</span>
+  </div>
+  <form class="bordered" method="post" onsubmit="showLoading()">
+    <label>Prefijo:
+      <input class="input-cyber" type="text" name="prefijo" value="{{prefi}}">
+    </label>
+    <label>Dígitos:
+      <input class="input-cyber" type="number" name="dig" min="2" max="7" value="{{dig}}">
+    </label>
+    <div style="display:flex; gap:15px; margin-top:15px;">
+      <button class="btn-cyberpunk" type="submit" name="modo" value="uno">Generar Código Cyber</button>
+      <button class="btn-cyberpunk" type="submit" name="modo" value="lote">Generar Lote 100 Códigos</button>
+    </div>
+    {% if code %}
+      <div class="code-box">{{code}}</div>
+      <script>document.getElementById("cyber-loading").style.display = "none";</script>
+    {% endif %}
+    {% if lote %}
+      <div class="lote-box">
+        <strong>Lote de 100 códigos:</strong>
+        <br><br>
+        {% for cod in lote %}
+          <span class="lote-code">{{cod}}</span>
+          {% if loop.index % 8 == 0 %}<br>{% endif %}
+        {% endfor %}
+      </div>
+      <script>document.getElementById("cyber-loading").style.display = "none";</script>
+    {% endif %}
+  </form>
+  <div class="footer-deco">
+    <span>✧ ✶  Página decorada por tu cyber asistente  ✶ ✧</span>
+  </div>
+  <script>
+    function showLoading() {
+      document.getElementById("cyber-loading").style.display = "flex";
+    }
+  </script>
+</body>
+</html>
